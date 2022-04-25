@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //elokuvaSpinner jutut alkaa
         spinnerCurrentMovies = findViewById(R.id.spinnerShowCurrentMovies);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.movies, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCurrentMovies.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.movies, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCurrentMovies.setAdapter(adapter1);
 
         spinnerCurrentMovies.setOnItemSelectedListener(this);
 
@@ -44,11 +44,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         //ratingSpinner jutut alkaa
-        spinnerCurrentMovies = findViewById(R.id.spinnerShowCurrentMovies);
+        spinnerCurrentMovies = findViewById(R.id.spinnerRating);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.movies, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCurrentMovies.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.ratings, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCurrentMovies.setAdapter(adapter2);
 
         spinnerCurrentMovies.setOnItemSelectedListener(this);
 
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-    //elokuvaSpinner noi loput
+    //Spinneriä on noi loput
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
