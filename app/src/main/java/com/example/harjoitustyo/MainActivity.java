@@ -7,10 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     //Import views
     Button sign_in_button;
     Button register_button;
@@ -18,10 +22,26 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     //Create object in order to be able to send data from one view to another
     private DataTransverClass transfer = new DataTransverClass();
+    private Spinner spinnerCurrentMovies; //elokuvaSpinner
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //elokuvaSpinner jutut alkaa
+        spinnerCurrentMovies = findViewById(R.id.spinnerShowCurrentMovies);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.movies, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCurrentMovies.setAdapter(adapter);
+
+        spinnerCurrentMovies.setOnItemSelectedListener(this);
+
+
+        //elokuvaSpinner jutut loppuu toistaiseksi
+
+
         //Initialize all buttons and edit text
         sign_in_button = findViewById(R.id.signIn_Button);
         register_button = findViewById(R.id.register_Button);
@@ -85,5 +105,19 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(transfer.getText());
             }
         }
+    }
+
+
+    //elokuvaSpinner noi loput
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String choice = adapterView.getItemAtPosition(i).toString();
+        Toast.makeText(getApplicationContext(), choice, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
