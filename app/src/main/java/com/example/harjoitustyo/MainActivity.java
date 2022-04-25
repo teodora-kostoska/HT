@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //Create object in order to be able to send data from one view to another
     private DataTransverClass transfer = new DataTransverClass();
     private Spinner spinnerCurrentMovies; //elokuvaSpinner
+    private Spinner spinnerRatings; //ratingSpinner
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         //elokuvaSpinner jutut loppuu toistaiseksi
+
+
+        //ratingSpinner jutut alkaa
+        spinnerCurrentMovies = findViewById(R.id.spinnerShowCurrentMovies);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.movies, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCurrentMovies.setAdapter(adapter);
+
+        spinnerCurrentMovies.setOnItemSelectedListener(this);
+
+
+        //ratingSpinner jutut loppuu toistaiseksi
 
 
         //Initialize all buttons and edit text

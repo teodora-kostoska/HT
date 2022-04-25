@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="197dp"
+        android:layout_width="208dp"
         android:layout_height="45dp"
         android:layout_marginTop="72dp"
         android:text="Rate a movie"
@@ -21,20 +21,19 @@
     <Spinner
         android:id="@+id/spinnerShowCurrentMovies"
         android:layout_width="208dp"
-        android:layout_height="38dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Movie name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <EditText
-        android:id="@+id/rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Spinner
+        android:id="@+id/spinnerRating"
+        android:layout_width="208dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -46,16 +45,16 @@
 
     <EditText
         android:id="@+id/comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="208dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Comment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rating" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerRating" />
 
     <Button
         android:id="@+id/rate_button"
@@ -66,7 +65,7 @@
         android:text="Give Rating"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comment" />
 

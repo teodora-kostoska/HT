@@ -10,4 +10,12 @@
         <item>Batman</item>
         <item>Poirot</item>
     </string-array>
+
+    <string-array name="ratings">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+    </string-array>
 </resources>
