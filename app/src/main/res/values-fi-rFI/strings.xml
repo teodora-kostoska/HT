@@ -8,4 +8,21 @@
     <string name="username">Käyttäjänimi</string>
     <string name="buttonCreateUser">Luo käyttäjä</string>
     <string name="changeLang">Vaihda kieli</string>
+    <string name="spinnerListMoviesByRating">Listaa elokuvat arvostelun mukaan</string>
+    <string name="movieApp">Elokuva-applikaatio</string>
+    <string name="signIn">Kirjaudu sisään</string>
+    <string name="mainPage">Etusivu</string>
+    <string name="showCurrentMovies">Näytä nykyiset elokuvat</string>
+    <string name="listMoviesByRating">Listaa elokuvat arvostelun mukaan</string>
+    <string name="rateAMovie">Arvostele elokuva</string>
+    <string name="settings">Asetukset</string>
+    <string name="comment">Kommentti</string>
+    <string name="rate">Arvostele</string>
+    <string name="editUserInfo">Muokkaa käyttäjän tietoja</string>
+    <string name="signOut">Kirjaudu ulos</string>
+    <string name="deleteAccount">Poista käyttäjä</string>
+    <string name="changePassword">Vaihda salasana</string>
+    <string name="changeUsername">Vaihda käyttäjänimi</string>
+
+
 </resources>

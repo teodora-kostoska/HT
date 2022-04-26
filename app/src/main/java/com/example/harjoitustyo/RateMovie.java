@@ -22,8 +22,8 @@ public class RateMovie extends AppCompatActivity {
         setContentView(R.layout.activity_rate_movie);
         //Find all the views in activity by id
         rate = findViewById(R.id.rate_button);
-        movie_name = findViewById(R.id.movie_name);
-        movie_rating = findViewById(R.id.rating);
+        //movie_name = findViewById(R.id.movie_name);
+        //movie_rating = findViewById(R.id.rating);
         movie_comment = findViewById(R.id.comment);
         //Get any data that was sent via intent from Main Menu
         data =(DataTransverClass) getIntent().getSerializableExtra("object");

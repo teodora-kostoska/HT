@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Harjoitustyo</string> //varmaan pitää muuttaa englanniksi
+    <string name="app_name">Project</string>
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
@@ -7,12 +7,28 @@
     <string name="username">Username</string>
     <string name="buttonCreateUser">Create user</string>
     <string name="changeLang">Change Language</string>
+    <string name="spinnerListMoviesByRating">List movies by rating</string>
+    <string name="movieApp">Movie app</string>
+    <string name="signIn">Sign In</string>
+    <string name="mainPage">Main Page</string>
+    <string name="showCurrentMovies">Show current movies</string>
+    <string name="listMoviesByRating">List movies by rating</string>
+    <string name="rateAMovie">Rate a movie</string>
+    <string name="settings">Settings</string>
+    <string name="comment">Comment</string>
+    <string name="rate">Rate</string>
+    <string name="editUserInfo">Edit User Info</string>
+    <string name="signOut">Sign Out</string>
+    <string name="deleteAccount">Delete account</string>
+    <string name="changePassword">Change password</string>
+    <string name="changeUsername">Change username</string>
 
 
     <string-array name="movies">
         <item>Batman</item>
         <item>Poirot</item>
     </string-array>
+
 
     <string-array name="ratings">
         <item>One</item>

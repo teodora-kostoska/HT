@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterPage">
+
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="132dp"
-        android:layout_height="43dp"
+        android:layout_width="196dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
         android:text="@string/register"
         android:textColor="@android:color/black"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +29,7 @@
         android:inputType="textPersonName"
         android:text="@string/username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="TouchTargetSizeCheck" />
@@ -43,7 +44,7 @@
         android:inputType="textPersonName"
         android:text="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username"
         tools:ignore="TouchTargetSizeCheck" />
@@ -58,7 +59,7 @@
         android:inputType="textPassword"
         android:text="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_id"
         tools:ignore="TouchTargetSizeCheck" />
@@ -73,7 +74,7 @@
         android:inputType="textEmailAddress"
         android:text="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
         tools:ignore="TouchTargetSizeCheck" />
@@ -87,19 +88,8 @@
         android:text="@string/buttonCreateUser"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_id" />
-
-    <Button
-        android:id="@+id/changeMyLang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:text="@string/changeLang"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
