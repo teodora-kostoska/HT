@@ -11,6 +11,7 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
+        android:gravity="center"
         android:text="@string/spinnerListMoviesByRating"
         android:textColor="@android:color/black"
         android:textSize="34sp"

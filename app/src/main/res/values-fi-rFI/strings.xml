@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Harjoitustyo</string>
+    <string name="app_name">Harjoitustyö</string>
     <string name="email">Sähköposti</string>
     <string name="name">Nimi</string>
     <string name="password">Salasana</string>
-    <string name="register">Rekisteröinti</string>
+    <string name="register">Rekisteröidy</string>
     <string name="username">Käyttäjänimi</string>
     <string name="buttonCreateUser">Luo käyttäjä</string>
     <string name="changeLang">Vaihda kieli</string>
