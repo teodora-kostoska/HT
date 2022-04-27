@@ -23,6 +23,7 @@
     <string name="deleteAccount">Poista käyttäjä</string>
     <string name="changePassword">Vaihda salasana</string>
     <string name="changeUsername">Vaihda käyttäjänimi</string>
+    <string name="showOtherUsers">Näytä muut käyttäjät</string>
 
 
 </resources>

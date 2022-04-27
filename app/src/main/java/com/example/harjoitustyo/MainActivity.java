@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity{
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.app_name));
 
+
+
+
         Button changeLang = findViewById(R.id.changeMyLang);
         changeLang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity{
                 showChangeLanguageDialog();
             }
         });
+
+
 
 
         /*//elokuvaSpinner jutut alkaa
@@ -99,6 +104,11 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
+
+
+
+
+
     private void showChangeLanguageDialog() {
         final String[] listItems = {"Suomi", "English"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -142,6 +152,11 @@ public class MainActivity extends AppCompatActivity{
         String language = prefs.getString("My_Lang", "");
         setLocale(language);
     }
+
+
+
+
+
 
     public void loadMainMenu(){
         //Send object to second activity and wait for result from activity

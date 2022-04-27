@@ -22,6 +22,7 @@
     <string name="deleteAccount">Delete account</string>
     <string name="changePassword">Change password</string>
     <string name="changeUsername">Change username</string>
+    <string name="showOtherUsers">Show other users</string>
 
 
     <string-array name="movies">
