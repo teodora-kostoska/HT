@@ -23,6 +23,9 @@
     <string name="changePassword">Change password</string>
     <string name="changeUsername">Change username</string>
     <string name="showOtherUsers">Show other users</string>
+    <string name="authenticationError">Authentication error:</string>
+    <string name="sign_in_with_fingerprint">Sign in with fingerprint</string>
+    <string name="click_button_to_sign_in_with_fingerprint">Click button to sign in with fingerprint</string>
 
 
     <string-array name="movies">
