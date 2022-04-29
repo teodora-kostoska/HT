@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">Project</string>
     <string name="email">Email</string>
+    <string name="rate_a_movie">Rate a movie</string>
+    <string name="comment">Comment</string>
+    <string name="give_rating">Give Rating</string>
     <string name="name">Name</string>
-    <string name="password">Password</string>
-    <string name="register">Register</string>
+    <string name="change_username">Change username</string>
+    <string name="change_password">Change password</string>
+    <string name="delete_account">Delete account</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="edit_user_info">Edit User Info</string>
+    <string name="settings">Settings</string>
+    <string name="movie_app">Movie app</string>
     <string name="username">Username</string>
     <string name="buttonCreateUser">Create user</string>
     <string name="changeLang">Change Language</string>
@@ -34,6 +42,14 @@
     <string name="userAppPassword">User App Password</string>
 
 
+    <string name="sign_in">Sign In</string>
+    <string name="register">Register</string>
+    <string name="textview">TextView</string>
+    <string name="password">Password</string>
+    <string name="main_page">Main page</string>
+    <string name="show_current_movies">Show current movies</string>
+    <string name="list_movies_by_rating">List movies by rating</string>
+    <string name="create_user">Create user</string>
 
     <string-array name="movies">
         <item>Batman</item>

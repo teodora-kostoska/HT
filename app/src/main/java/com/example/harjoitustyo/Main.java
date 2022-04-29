@@ -8,10 +8,11 @@ public class Main {
         Movie movie = new Movie("1", "2", "3", "4");
         movie.setMovieName("Aladfin");
         System.out.println(movie.getMovieName());
-/*
+
         User user = new User("1", "2", "3", "4", "5");
         user.setPassword("Aladfin");
-        System.out.println(user.getUsername() + user.getPassword());  */
+        System.out.println(user.getUsername() + user.getPassword());
+
     }
 
 }

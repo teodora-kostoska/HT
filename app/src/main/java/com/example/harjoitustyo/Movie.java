@@ -1,48 +1,50 @@
 package com.example.harjoitustyo;
 
-public class Movie {
-    String movieName;
-    String producer;
-    String lead;
-    String releaseDate;
+import java.io.Serializable;
 
-    public Movie(String movieName, String producer, String lead, String releaseDate) {
+public class Movie implements Serializable {
+    String movieName;
+    String duration;
+    String genre;
+    String releaseYear;
+
+    public Movie(String movieName, String duration, String genre, String releaseDate) {
         this.movieName = movieName;
-        this.producer = producer;
-        this.lead = lead;
-        this.releaseDate = releaseDate;
+        this.duration = duration;
+        this.genre = genre;
+        this.releaseYear = releaseDate;
     }
 
     public String getMovieName() {
         return movieName;
     }
 
-    public String getProducer() {
-        return producer;
+    public String getDuration() {
+        return duration;
     }
 
-    public String getLead() {
-        return lead;
+    public String getGenre() {
+        return genre;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getReleaseYear() {
+        return releaseYear;
     }
 
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
 
-    public void setProducer(String producer) {
-        this.producer = producer;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
-    public void setLead(String lead) {
-        this.lead = lead;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setReleaseYear(String releaseDate) {
+        this.releaseYear = releaseDate;
     }
 
 }
