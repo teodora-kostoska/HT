@@ -24,8 +24,15 @@
     <string name="changeUsername">Change username</string>
     <string name="showOtherUsers">Show other users</string>
     <string name="authenticationError">Authentication error:</string>
+    <string name="authenticationSucceed">Authentication Succeed:</string>
+    <string name="authenticationFailed">Authentication failed:</string>
     <string name="sign_in_with_fingerprint">Sign in with fingerprint</string>
     <string name="click_button_to_sign_in_with_fingerprint">Click button to sign in with fingerprint</string>
+    <string name="chooseLanguage">Choose Language</string>
+    <string name="biometricAuthentication">Biometric authentication</string>
+    <string name="loginUsingFingerprintAuthentication">"Login using fingerprint authentication"</string>
+    <string name="userAppPassword">User App Password</string>
+
 
 
     <string-array name="movies">

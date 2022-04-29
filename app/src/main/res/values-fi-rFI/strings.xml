@@ -24,8 +24,16 @@
     <string name="changePassword">Vaihda salasana</string>
     <string name="changeUsername">Vaihda käyttäjänimi</string>
     <string name="showOtherUsers">Näytä muut käyttäjät</string>
-    <string name="authenticationError">Virhe tunnistautumisessa</string>
+    <string name="authenticationError">Virhe tunnistautumisessa: </string>
+    <string name="authenticationSucceed">Tunnistautuminen onnistui: </string>
+    <string name="authenticationFailed">Tunnistautuminen epäonnistui: </string>
     <string name="sign_in_with_fingerprint">Kirjaudu sormenjäljellä</string>
     <string name="click_button_to_sign_in_with_fingerprint">Paina nappia kirjautuaksesi sormenjäljellä</string>
+    <string name="chooseLanguage">Valitse kieli</string>
+    <string name="biometricAuthentication">Biometrinen tunnistautuminen</string>
+    <string name="loginUsingFingerprintAuthentication">"Kirjaudu sormenjäljellä"</string>
+    <string name="userAppPassword">Kirjaudu salasanalla</string>
+
+    <!--Finnish translations-->
 
 </resources>

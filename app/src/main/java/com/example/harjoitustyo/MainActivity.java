@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
     //Create object in order to be able to send data from one view to another
     private DataTransverClass transfer = new DataTransverClass();
 
-    // private Spinner spinnerCurrentMovies; elokuvaSpinner
+    //private Spinner spinnerCurrentMovies; elokuvaSpinner
     //private Spinner spinnerRatings; ratingSpinner
 
     @Override
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity{
         loadLocale();
         setContentView(R.layout.activity_main);
 
+        //change actionbar title, if this isn't done it will be on systems default language
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.app_name));
 
@@ -69,33 +70,33 @@ public class MainActivity extends AppCompatActivity{
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
                 //Stop tasks that requires authentication
-                authStatusTv.setText("Authentication error " + ":" + errString);
-                Toast.makeText(MainActivity.this, "Authentication error" + ": " + errString, Toast.LENGTH_SHORT).show();
+                authStatusTv.setText(getApplicationContext().getResources().getString(R.string.authenticationError) + " " + errString);
+                Toast.makeText(MainActivity.this, getApplicationContext().getResources().getString(R.string.authenticationError) + errString, Toast.LENGTH_SHORT).show();
              }
 
             @Override
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 //Continue tasks that require authentication
-                authStatusTv.setText("Authentication succeed!");
-                Toast.makeText(MainActivity.this, "Authentication succeed!", Toast.LENGTH_SHORT).show();
+                authStatusTv.setText(getApplicationContext().getResources().getString(R.string.authenticationSucceed));
+                Toast.makeText(MainActivity.this, getApplicationContext().getResources().getString(R.string.authenticationSucceed), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
                 //Stop tasks that requires authentication
-                authStatusTv.setText("Authentication failed!");
-                Toast.makeText(MainActivity.this, "Authentication failed!", Toast.LENGTH_SHORT).show();
+                authStatusTv.setText(getApplicationContext().getResources().getString(R.string.authenticationFailed));
+                Toast.makeText(MainActivity.this, getApplicationContext().getResources().getString(R.string.authenticationFailed), Toast.LENGTH_SHORT).show();
             }
         });
 
 
         //Setuping the description on authorising dialog and titles
         promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Biometric Authentication")
-                .setSubtitle("Login using fingerprint authentication")
-                .setNegativeButtonText("User App Password")
+                .setTitle(getApplicationContext().getResources().getString(R.string.biometricAuthentication))
+                .setSubtitle(getApplicationContext().getResources().getString(R.string.loginUsingFingerprintAuthentication))
+                .setNegativeButtonText(getApplicationContext().getResources().getString(R.string.userAppPassword))
                 .build();
 
 
@@ -108,17 +109,16 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
-
         //Change language
         Button changeLang = findViewById(R.id.changeMyLang);
         changeLang.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
+                //Show list of languages, one can be selected
                 showChangeLanguageDialog();
             }
         });
-
-
 
 
         /*
@@ -171,35 +171,36 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-
-
-
     //Change language
     private void showChangeLanguageDialog() {
+        //Array of different languages
         final String[] listItems = {"Suomi", "English"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
-        mBuilder.setTitle("Choose Language...");
+        mBuilder.setTitle(getApplicationContext().getResources().getString(R.string.chooseLanguage));
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i == 0) {
+                    //Finnish
                     setLocale("fi");
                     recreate();
                 }
                 if (i == 1) {
+                    //English
                     setLocale("en");
                     recreate();
                 }
-
+                //Dismiss dialog once language selected
                 dialogInterface.dismiss();
 
             }
         });
 
         AlertDialog mDialog = mBuilder.create();
-
+        //Show alert dialog
         mDialog.show();
     }
+
 
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
@@ -207,21 +208,19 @@ public class MainActivity extends AppCompatActivity{
         Configuration config = new Configuration();
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
+        //Save data to shared preferences
         SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("My_Lang", lang);
         editor.apply();
     }
 
+
+    //Load a language in shared preferences
     public void loadLocale(){
         SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String language = prefs.getString("My_Lang", "");
         setLocale(language);
     }
-
-
-
-
 
 
     public void loadMainMenu(){

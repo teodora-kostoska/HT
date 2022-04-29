@@ -3,6 +3,7 @@ package com.example.harjoitustyo;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,13 +22,10 @@ public class Settings extends AppCompatActivity {
     //Initialize views and data transfer object
     Button modify_info;
     Button sign_out;
-    Button delete_account;
 
     EditText new_username;
     EditText new_password;
     private DataTransverClass data = null;
-
-
 
 
     @Override
@@ -37,10 +35,8 @@ public class Settings extends AppCompatActivity {
         //Find the corresponding views by id
         modify_info =findViewById(R.id.edit_user_info);
         sign_out = findViewById(R.id.sign_out);
-        delete_account = findViewById(R.id.delete_account);
         new_username = findViewById(R.id.change_username);
         new_password = findViewById(R.id.change_password);
-
 
 
 
@@ -48,23 +44,17 @@ public class Settings extends AppCompatActivity {
         changeLang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Show list of languages, one can be selected
                 showChangeLanguageDialog();
             }
         });
-
 
 
         //Get data that was sent from Main menu
         data =(DataTransverClass) getIntent().getSerializableExtra("object");
         System.out.println(data.getText());
         //Set listener on account deletion button
-        delete_account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Method to delete account
-                deleteAccount();
-            }
-        });
+
         //Listener for sign out button
         sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,9 +73,8 @@ public class Settings extends AppCompatActivity {
     }
 
 
-
-
     private void showChangeLanguageDialog() {
+        //Array of different languages
         final String[] listItems = {"Suomi", "English"};
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(Settings.this);
         mBuilder.setTitle("Choose Language...");
@@ -93,21 +82,23 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (i == 0) {
+                    //Finnish
                     setLocale("fi");
                     recreate();
                 }
                 if (i == 1) {
+                    //English
                     setLocale("en");
                     recreate();
                 }
-
+                //Dismiss dialog once language selected
                 dialogInterface.dismiss();
 
             }
         });
 
         AlertDialog mDialog = mBuilder.create();
-
+        //Show alert dialog
         mDialog.show();
     }
 
@@ -117,20 +108,18 @@ public class Settings extends AppCompatActivity {
         Configuration config = new Configuration();
         config.locale = locale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
+        //Save data to shared preferences
         SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("My_Lang", lang);
         editor.apply();
     }
 
+    //Load a language in shared preferences
     public void loadLocale(){
         SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String language = prefs.getString("My_Lang", "");
         setLocale(language);
     }
-
-
-
 
 
     @Override
