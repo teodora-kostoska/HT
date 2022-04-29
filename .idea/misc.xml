@@ -3,6 +3,45 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HT/app/src/main/res/layout/activity_list_movies_by_rating.xml" value="0.5451282051282051" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HT/app/src/main/res/layout/activity_main.xml" value="0.5451282051282051" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HT/app/src/main/res/layout/activity_main_menu.xml" value="0.5451282051282051" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HT/app/src/main/res/layout/activity_rate_movie.xml" value="0.5451282051282051" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HT/app/src/main/res/layout/activity_register_page.xml" value="0.5231481481481481" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HT/app/src/main/res/layout/activity_settings.xml" value="0.5451282051282051" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HT/app/src/main/res/layout/activity_show_current_movies.xml" value="0.5451282051282051" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTTheo/app/src/main/res/layout/activity_main.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTTheo/app/src/main/res/layout/activity_main_menu.xml" value="0.22" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTTheo/app/src/main/res/layout/activity_rate_movie.xml" value="0.22" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTTheo/app/src/main/res/layout/activity_register_page.xml" value="0.22" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTTheo/app/src/main/res/layout/activity_show_current_movies.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2825" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_baseline_fingerprint.xml" value="0.2825" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_fingerprint_black.xml" value="0.2825" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_fingerprint_white.xml" value="0.2825" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2825" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_list.xml" value="0.5475" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_list2.xml" value="0.5475" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_movie3.xml" value="0.5" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_movies.xml" value="0.3775" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_movies2.xml" value="0.5475" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_rate.xml" value="0.5475" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_rate2.xml" value="0.5475" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_settings.xml" value="0.5475" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_settings2.xml" value="0.5475" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/drawable/ic_user2.xml" value="0.5475" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/layout/activity_list_movies_by_rating.xml" value="0.5231481481481481" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/layout/activity_main_menu.xml" value="0.5231481481481481" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/layout/activity_rate_movie.xml" value="0.5231481481481481" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/layout/activity_register_page.xml" value="0.5231481481481481" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/layout/activity_settings.xml" value="0.5" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/layout/activity_show_current_movies.xml" value="0.5231481481481481" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTjuusto/app/src/main/res/layout/activity_show_other_users.xml" value="0.3770833333333333" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTliukyjt/app/src/main/res/layout/activity_main.xml" value="0.45740740740740743" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTliukyjt/app/src/main/res/layout/activity_main_menu.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTliukyjt/app/src/main/res/layout/activity_register_page.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/roope/AndroidStudioProjects/HTliukyjt/app/src/main/res/layout/activity_settings.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/teodo/AndroidStudioProjects/Harjoitustyo/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/teodo/AndroidStudioProjects/Harjoitustyo/app/src/main/res/layout/activity_main_menu.xml" value="0.25" />
         <entry key="..\:/Users/teodo/AndroidStudioProjects/Harjoitustyo/app/src/main/res/layout/activity_rate_movie.xml" value="0.25" />

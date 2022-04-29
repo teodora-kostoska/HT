@@ -61,6 +61,7 @@ public class MainMenu extends AppCompatActivity {
         show_current.setOnClickListener(view -> {
 
         });
+
     }
 
     @Override

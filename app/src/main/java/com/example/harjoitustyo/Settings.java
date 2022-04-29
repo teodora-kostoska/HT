@@ -1,11 +1,21 @@
 package com.example.harjoitustyo;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+
+import java.util.Locale;
 //This is connected to activity_settings layout
 
 public class Settings extends AppCompatActivity {
@@ -19,6 +29,7 @@ public class Settings extends AppCompatActivity {
     private MovieManager manager = null;
     private User user = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,24 +40,112 @@ public class Settings extends AppCompatActivity {
         delete_account = findViewById(R.id.delete_account);
         new_username = findViewById(R.id.change_username);
         new_password = findViewById(R.id.change_password);
+
+
+
+        Button changeLang = findViewById(R.id.changeMyLang);
+        changeLang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Show list of languages, one can be selected
+                showChangeLanguageDialog();
+            }
+        });
+
+
         //Get data that was sent from Main menu
         data =(DataTransverClass) getIntent().getSerializableExtra("object");
         manager = (MovieManager) getIntent().getSerializableExtra("manager");
         user = (User) getIntent().getSerializableExtra("user");
         System.out.println(data.getText());
+
+        /*delete_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Method to delete account
+                deleteAccount();
+            }
+        });*/
+
         //Set listener on account deletion button
         delete_account.setOnClickListener(view -> {
             //Method to delete account
             deleteAccount();
         });
         //Listener for sign out button
+
+        /*sign_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //To sign out method
+                signOut();
+            }*/
+
         sign_out.setOnClickListener(view -> {
             //To sign out method
             signOut();
         });
+
+        /*modify_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                enableEditing();
+            }
+        });*/
+
         //to edit the username and password of user
         modify_info.setOnClickListener(view -> enableEditing());
     }
+
+
+    private void showChangeLanguageDialog() {
+        //Array of different languages
+        final String[] listItems = {"Suomi", "English"};
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Settings.this);
+        mBuilder.setTitle("Choose Language...");
+        mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (i == 0) {
+                    //Finnish
+                    setLocale("fi");
+                    recreate();
+                }
+                if (i == 1) {
+                    //English
+                    setLocale("en");
+                    recreate();
+                }
+                //Dismiss dialog once language selected
+                dialogInterface.dismiss();
+
+            }
+        });
+
+        AlertDialog mDialog = mBuilder.create();
+        //Show alert dialog
+        mDialog.show();
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        //Save data to shared preferences
+        SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("My_Lang", lang);
+        editor.apply();
+    }
+
+    //Load a language in shared preferences
+    public void loadLocale(){
+        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String language = prefs.getString("My_Lang", "");
+        setLocale(language);
+    }
+
 
     @Override
     //When arrow back of phone is pressed it goes back to the previous page which is Main menu,
