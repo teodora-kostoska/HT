@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 //Connected to activity_main_menu layout
 
@@ -15,6 +14,8 @@ public class MainMenu extends AppCompatActivity {
     Button rate_movie;
     Button show_current;
     private DataTransverClass data = null;
+    private User user = null;
+    private MovieManager manager = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,45 +27,39 @@ public class MainMenu extends AppCompatActivity {
         show_current = findViewById(R.id.current_button);
         //Get any data that was sent from login i.e user information
         data =(DataTransverClass) getIntent().getSerializableExtra("object");
+        user = (User) getIntent().getSerializableExtra("user");
+        manager = (MovieManager) getIntent().getSerializableExtra("manager");
         System.out.println(data.getText());
         //Set on click listener for settings button, so that when settings button is pressed the settings activity is launched
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Send object to second activity and wait for result from activity
-                //Set intent which contains information on the current activity and the target activity
-                Intent intent = new Intent(MainMenu.this, Settings.class);
-                //Check data transfer object workings
-                data.setText("Sending some random text from Main menu!");
-                intent.putExtra("object", data);
-                startActivityForResult(intent, 2);
-            }
+        settings.setOnClickListener(view -> {
+            //Send object to second activity and wait for result from activity
+            //Set intent which contains information on the current activity and the target activity
+            Intent intent = new Intent(MainMenu.this, Settings.class);
+            //Check data transfer object workings
+            data.setText("Sending some random text from Main menu!");
+            intent.putExtra("object", data);
+            intent.putExtra("manager", manager);
+            intent.putExtra("user", user);
+            startActivityForResult(intent, 2);
         });
         //TODO:No activity for this yet (List movies by rating)
-        list_movie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        list_movie.setOnClickListener(view -> {
 
-            }
         });
         //set on click listener for when rate movie button is pressed
-        rate_movie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Send object to second activity and wait for result from activity
-                //TODO: Probably no need to wait for result from rate movie, as this should be done through db
-                Intent intent = new Intent(MainMenu.this, RateMovie.class);
-                data.setText("Sending some random text from Main Menu!");
-                intent.putExtra("object", data);
-                startActivityForResult(intent, 2);
-            }
+        rate_movie.setOnClickListener(view -> {
+            //Send object to second activity and wait for result from activity
+            //TODO: Probably no need to wait for result from rate movie, as this should be done through db
+            Intent intent = new Intent(MainMenu.this, RateMovie.class);
+            data.setText("Sending some random text from Main Menu!");
+            intent.putExtra("object", data);
+            intent.putExtra("manager", manager);
+            intent.putExtra("user",user);
+            startActivityForResult(intent, 2);
         });
         //TODO: No activity for this yet (Create activity for Showing of movies currently in theatre)
-        show_current.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        show_current.setOnClickListener(view -> {
 
-            }
         });
     }
 
@@ -76,6 +71,7 @@ public class MainMenu extends AppCompatActivity {
         Intent intent = new Intent();
         data.setText("Sending new text back from Main Menu!");
         intent.putExtra("object", data);
+        intent.putExtra("manager", manager);
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -90,6 +86,8 @@ public class MainMenu extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 //Get the result
                 this.data = (DataTransverClass) data.getSerializableExtra("object");
+                this.manager = (MovieManager) data.getSerializableExtra("manager");
+                this.user = (User) data.getSerializableExtra("user");
                 System.out.println(this.data.getText());
             }
         }

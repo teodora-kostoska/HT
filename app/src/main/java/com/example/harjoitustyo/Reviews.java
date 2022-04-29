@@ -1,6 +1,8 @@
 package com.example.harjoitustyo;
 
-public class Reviews {
+import java.io.Serializable;
+
+public class Reviews implements Serializable {
 
     String comment;
     int rating;

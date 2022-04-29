@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 //This is connected to activity_settings layout
 
@@ -18,6 +16,8 @@ public class Settings extends AppCompatActivity {
     EditText new_username;
     EditText new_password;
     private DataTransverClass data = null;
+    private MovieManager manager = null;
+    private User user = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,30 +31,21 @@ public class Settings extends AppCompatActivity {
         new_password = findViewById(R.id.change_password);
         //Get data that was sent from Main menu
         data =(DataTransverClass) getIntent().getSerializableExtra("object");
+        manager = (MovieManager) getIntent().getSerializableExtra("manager");
+        user = (User) getIntent().getSerializableExtra("user");
         System.out.println(data.getText());
         //Set listener on account deletion button
-        delete_account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Method to delete account
-                deleteAccount();
-            }
+        delete_account.setOnClickListener(view -> {
+            //Method to delete account
+            deleteAccount();
         });
         //Listener for sign out button
-        sign_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //To sign out method
-                signOut();
-            }
+        sign_out.setOnClickListener(view -> {
+            //To sign out method
+            signOut();
         });
         //to edit the username and password of user
-        modify_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableEditing();
-            }
-        });
+        modify_info.setOnClickListener(view -> enableEditing());
     }
 
     @Override
@@ -68,6 +59,8 @@ public class Settings extends AppCompatActivity {
         //Set something in data object to check it works
         data.setText("Sending new text back from Settings!");
         intent.putExtra("object", data);
+        intent.putExtra("user", user);
+        intent.putExtra("manager",manager);
         //Set result code and intent
         setResult(RESULT_OK, intent);
         //Finish send the changes to previous activity

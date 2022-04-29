@@ -11,7 +11,7 @@
         android:layout_width="161dp"
         android:layout_height="42dp"
         android:layout_marginTop="40dp"
-        android:text="Movie app"
+        android:text="@string/movie_app"
         android:textColor="@android:color/black"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,11 +25,13 @@
         android:layout_marginTop="80dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Username"
+        android:minHeight="48dp"
+        android:text="@string/username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/PasswordID"
@@ -37,19 +39,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:text="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameID" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameID"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/signIn_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Sign In"
+        android:text="@string/sign_in"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,11 +66,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
-        android:text="Register"
+        android:text="@string/register"
         android:backgroundTint="@android:color/darker_gray"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signIn_Button" />
+
+    <TextView
+        android:id="@+id/loginInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

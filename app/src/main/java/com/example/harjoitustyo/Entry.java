@@ -1,27 +1,19 @@
 package com.example.harjoitustyo;
 
-public class Entry {
-    Movie movie;
-    String date;
+import java.io.Serializable;
 
-    public Entry(Movie movie, String date){
+public class Entry implements Serializable {
+    Movie movie;
+
+    public Entry(Movie movie){
         this.movie = movie;
-        this.date = date;
     }
 
     public Movie getMovie() {
         return movie;
     }
 
-    public String getDate() {
-        return date;
-    }
-
     public void setMovie(Movie movie) {
         this.movie = movie;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 }
