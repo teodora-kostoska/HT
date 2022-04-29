@@ -9,10 +9,10 @@ public class Main {
         movie.setMovieName("Aladfin");
         System.out.println(movie.getMovieName());
 
-        User user = new User("1", "2", "3", "4", "5");
+        /*User user = new User("1", "2", "3", "4", "5");
         user.setPassword("Aladfin");
         System.out.println(user.getUsername() + user.getPassword());
-
+*/
     }
 
 }

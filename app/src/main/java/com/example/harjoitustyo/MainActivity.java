@@ -41,7 +41,7 @@ import android.widget.TextView;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
     //Import views
     Button sign_in_button;
     Button register_button;
