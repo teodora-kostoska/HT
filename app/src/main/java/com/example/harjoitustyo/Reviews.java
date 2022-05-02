@@ -1,24 +1,15 @@
 package com.example.harjoitustyo;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import java.io.Serializable;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 
-@RequiresApi(api = Build.VERSION_CODES.O)
 public class Reviews implements Serializable {
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     String time;
     Movie movie;
     String comment;
-    int rating;
+    String rating;
 
-    public Reviews(Movie movie, String comment, int rating){
-        LocalDateTime now = LocalDateTime.now();
-        this.time = dtf.format(now);
+    public Reviews(Movie movie, String timestamp,String rating, String comment){
+        this.time = timestamp;
         this.movie = movie;
         this.comment = comment;
         this.rating = rating;
@@ -28,7 +19,11 @@ public class Reviews implements Serializable {
         return comment;
     }
 
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
+
+    public Movie getMovie(){ return movie;}
+
+    public String getTimeStamp() {return time;}
 }

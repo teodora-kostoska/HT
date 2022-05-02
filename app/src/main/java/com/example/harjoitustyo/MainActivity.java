@@ -64,16 +64,39 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_main);
+        loadLocale();
         manager = MovieManager.getInstance();
         File directory = getFilesDir();
         File file = new File(directory, "UserXML.txt");
         file.delete();
         File file2 = new File(directory, "MovieXML.txt");
         file2.delete();
+        File file3 = new File(directory, "ReviewsXML.txt");
+        file3.delete();
+
+        //Initialize all buttons and edit text
+        sign_in_button = findViewById(R.id.signIn_Button);
+        register_button = findViewById(R.id.register_Button);
+        username = findViewById(R.id.usernameID);
+        password = findViewById(R.id.PasswordID);
+        loginInfo = findViewById(R.id.loginInfo);
+        context = getApplicationContext();
+        //Set listener, so that when button is pressed it goes to Main Menu
+        sign_in_button.setOnClickListener(view -> {
+            int userExistance = manager.getUserFromXML(username.getText().toString(), password.getText().toString(),context);
+            if(userExistance == 1){
+                manager.GetMovieInfo(context);
+                user = manager.getCurrentUser(username.getText().toString());
+                loadMainMenu();
+            }else{
+                loginInfo.setText("Login credentials wrong, try again!");
+            }
+        });
+        //Set listener, so that when button pressed goes to Register Page
+        register_button.setOnClickListener(view -> loadRegister());
 
         //change actionbar title, if this isn't done it will be on systems default language
         ActionBar actionBar = getSupportActionBar();
@@ -141,29 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 showChangeLanguageDialog();
             }
         });
-
-        //Initialize all buttons and edit text
-        sign_in_button = findViewById(R.id.signIn_Button);
-        register_button = findViewById(R.id.register_Button);
-        username = findViewById(R.id.usernameID);
-        password = findViewById(R.id.PasswordID);
-        loginInfo = findViewById(R.id.loginInfo);
-        context = getApplicationContext();
-        //Set listener, so that when button is pressed it goes to Main Menu
-        //TODO: Needs separate method to check password and username, before sending to main menu
-        sign_in_button.setOnClickListener(view -> {
-            int userExistance = manager.getUserFromXML(username.getText().toString(), password.getText().toString(),context);
-            if(userExistance == 1){
-                manager.addUsersFromXMLToObject(context);
-                user = manager.getCurrentUser(username.getText().toString());
-                manager.GetMovieInfo(context);
-                loadMainMenu();
-            }else{
-                loginInfo.setText("Login credentials wrong, try again!");
-            }
-        });
-        //Set listener, so that when button pressed goes to Register Page
-        register_button.setOnClickListener(view -> loadRegister());
     }
 
 

@@ -44,7 +44,15 @@ public class MainMenu extends AppCompatActivity {
         });
         //TODO:No activity for this yet (List movies by rating)
         list_movie.setOnClickListener(view -> {
-
+            //Send object to second activity and wait for result from activity
+            //Set intent which contains information on the current activity and the target activity
+            Intent intent = new Intent(MainMenu.this, ListMoviesByRating.class);
+            //Check data transfer object workings
+            data.setText("Sending some random text from Main menu!");
+            intent.putExtra("object", data);
+            intent.putExtra("manager", manager);
+            intent.putExtra("user", user);
+            startActivityForResult(intent, 2);
         });
         //set on click listener for when rate movie button is pressed
         rate_movie.setOnClickListener(view -> {

@@ -17,24 +17,31 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MovieManager implements Serializable {
     private static MovieManager manager = null;
     ArrayList <User> users;
     ArrayList <Entry> entries;
     ArrayList <Entry> all_entries; //Entries that are in file also, TODO: Make sure they are unique!!
+    ArrayList <Reviews> reviews;
+    ArrayList<String[]> sorted_movies;
     int add_movies_to_xml;
 
     private MovieManager() {
         users = new ArrayList<>();
         entries = new ArrayList<>();
         all_entries = new ArrayList<>();
+        reviews = new ArrayList<>();
+        sorted_movies = new ArrayList<>();
         getMoviesFromFinnkino();
         add_movies_to_xml = 0;
     }
@@ -48,7 +55,9 @@ public class MovieManager implements Serializable {
 
     public void GetMovieInfo(Context context_app){
         if(add_movies_to_xml == 0) {
+            addUsersFromXMLToObject(context_app);
             getMoviesFromXML(context_app);
+            getReviewsFromXML(context_app);
             try {
                 addMoviesToXML(context_app);
                 add_movies_to_xml = 1;
@@ -59,14 +68,14 @@ public class MovieManager implements Serializable {
     }
 
     public int addUserToXML(String username, String name, String password, String email, Context context) throws IOException {
-        //Create user object
-        users.add(new User(name, email, username, password));
         String toFile;
         //Check whether username is taken
         int userExist = getUserFromXML(username,password, context);
         if(userExist == 1 || userExist ==2){
             return userExist;
         }
+        //Create user object
+        users.add(new User(name, email, username, password));
         //Creates new document
         File file = new File(context.getFilesDir(), "UserXML.txt");
         if(file.exists()){
@@ -145,7 +154,7 @@ public class MovieManager implements Serializable {
                     }
                 }
             } catch (ParserConfigurationException | IOException | SAXException e) {
-                e.printStackTrace();
+                System.out.println("UserXML doesn't exist");
             }
         }
     }
@@ -179,7 +188,7 @@ public class MovieManager implements Serializable {
                 }
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
+            System.out.println("UserXML doesn't exist");
         }
         return userExistance;
     }
@@ -225,7 +234,7 @@ public class MovieManager implements Serializable {
                 entries.add(new Entry(new Movie(name,duration,genre,releaseDate)));
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {
-            e.printStackTrace();
+            System.out.println("Couldn't get movies from finnkino");
         }
     }
 
@@ -256,7 +265,7 @@ public class MovieManager implements Serializable {
                     }
                 }
             } catch (ParserConfigurationException | IOException | SAXException e) {
-                e.printStackTrace();
+                System.out.println("MovieXML doesn't exist");
             }
             int k = 0;
             for(int i = 0; i<entries.size(); i++){
@@ -272,7 +281,19 @@ public class MovieManager implements Serializable {
                 k = 0;
             }
         }else{
-            all_entries = entries;
+            int k = 0;
+            for(int i = 0; i<entries.size();i++) {
+                for(int y = 0; y<all_entries.size();y++){
+                    if(all_entries.get(y).getMovie().getMovieName().compareTo(entries.get(i).getMovie().getMovieName())==0){
+                        k = 1;
+                        break;
+                    }
+                }
+                if(k == 0){
+                    all_entries.add(entries.get(i));
+                }
+                k = 0;
+            }
         }
     }
 
@@ -365,19 +386,161 @@ public class MovieManager implements Serializable {
         return returnUser;
     }
 
+    public void getReviewsFromXML(Context context){
+        reviews.clear();
+        File file = new File(context.getFilesDir(), "ReviewsXML.txt");
+        if(file.exists()) {
+            try {
+                InputStream ins = context.openFileInput("ReviewsXML.txt");
+                DocumentBuilder docBuild = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                Document xmlDoc = docBuild.parse(ins);
+                Element elem = xmlDoc.getDocumentElement();
+                elem.normalize();
+                NodeList list_of_users = elem.getElementsByTagName("reviewInfo");
+                for (int i = 0; i < list_of_users.getLength(); i++) {
+                    Node node = list_of_users.item(i);
+                    if (node.getNodeType() == Node.ELEMENT_NODE) {
+                        Element element2 = (Element) node;
+                        NodeList nodeName = element2.getElementsByTagName("movieTitle").item(0).getChildNodes();
+                        NodeList nodeDuration = element2.getElementsByTagName("movieDuration").item(0).getChildNodes();
+                        NodeList nodeGenre = element2.getElementsByTagName("movieGenre").item(0).getChildNodes();
+                        NodeList nodeYear = element2.getElementsByTagName("movieYear").item(0).getChildNodes();
+                        NodeList nodeTimestamp = element2.getElementsByTagName("timestamp").item(0).getChildNodes();
+                        NodeList nodeRating = element2.getElementsByTagName("rating").item(0).getChildNodes();
+                        NodeList nodeComment = element2.getElementsByTagName("comment").item(0).getChildNodes();
+                        Node nameNode = nodeName.item(0);
+                        Node durationNode = nodeDuration.item(0);
+                        Node genreNode = nodeGenre.item(0);
+                        Node yearNode = nodeYear.item(0);
+                        Node timestampNode = nodeTimestamp.item(0);
+                        Node ratingNode = nodeRating.item(0);
+                        Node commentNode = nodeComment.item(0);
+                        reviews.add(new Reviews(new Movie(nameNode.getNodeValue(), durationNode.getNodeValue(), genreNode.getNodeValue(), yearNode.getNodeValue()), timestampNode.getNodeValue(),ratingNode.getNodeValue(),commentNode.getNodeValue()));
+                    }
+                }
+            } catch (ParserConfigurationException | IOException | SAXException e) {
+                System.out.println("ReviewsXML doesn't exist");
+            }
+        }
+
+    }
+
+    public void setReviewToXML(Context context, Movie movie, String rating, String comment) throws IOException{
+        String toFile;
+        SimpleDateFormat date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+        String timeStamp = date.format(new Date());
+        //Create user object
+        reviews.add(new Reviews(movie, timeStamp, rating, comment));
+        //Creates new document
+        File file = new File(context.getFilesDir(), "ReviewsXML.txt");
+        if(file.exists()){
+            List<String> list_of_content = new ArrayList<>();
+            InputStream in = context.openFileInput("ReviewsXML.txt");
+            BufferedReader r = new BufferedReader(new InputStreamReader(in));
+            String output;
+            while((output = r.readLine()) != null){
+                list_of_content.add(output + "\n");
+            }
+            int i = 0;
+            int y = 0;
+            while(i< list_of_content.size()){
+                if(list_of_content.get(i).equals("</reviewList>"))
+                    break;
+                if(list_of_content.get(i).contains("</reviewInfo>")){
+                    y = y+1;
+                }
+                i++;
+            }
+            toFile = "<reviewInfo review_id='"+ y +"'>\n" +
+                    "<movieTitle>" + movie.getMovieName() + "</movieTitle>\n" +
+                    "<movieDuration>" + movie.getDuration() + "</movieDuration>\n" +
+                    "<movieGenre>" + movie.getGenre() + "</movieGenre>\n" +
+                    "<movieYear>" + movie.getReleaseYear() +"</movieYear>\n" +
+                    "<timestamp>" + timeStamp + "</timestamp>\n"+
+                    "<rating>" + rating + "</rating>\n"+
+                    "<comment>" + comment + "</comment>\n"+
+                    "</reviewInfo>\n";
+            list_of_content.add((i-1), toFile);
+            OutputStreamWriter result = new OutputStreamWriter(context.openFileOutput("ReviewsXML.txt", Context.MODE_PRIVATE));
+            i = 0;
+            while(i < list_of_content.size()){
+                result.write(list_of_content.get(i));
+                i++;
+            }
+            result.close();
+        }
+        else {
+            toFile = "<reviewList>\n" +"<reviewInfo review_id='0'>\n" +
+                    "<movieTitle>" + movie.getMovieName() + "</movieTitle>\n" +
+                    "<movieDuration>" + movie.getDuration() + "</movieDuration>\n" +
+                    "<movieGenre>" + movie.getGenre() + "</movieGenre>\n" +
+                    "<movieYear>" + movie.getReleaseYear() +"</movieYear>\n" +
+                    "<timestamp>" + timeStamp + "</timestamp>\n"+
+                    "<rating>" + rating + "</rating>\n"+
+                    "<comment>" + comment + "</comment>\n"+
+                    "</reviewInfo>\n"+
+                    "</reviewList>\n";
+            OutputStreamWriter result = new OutputStreamWriter(context.openFileOutput("ReviewsXML.txt", Context.MODE_PRIVATE));
+            result.write(toFile);
+            result.close();
+            System.out.println("File created!");
+        }
+    }
+
+    public void getReviewsByMovieName(){
+
+    }
+
+    public ArrayList<String> sortMoviesByRating() {
+        sorted_movies.clear();
+        float average = 0.0f;
+        float amount = 0.0f;
+        float calculated_average = 0.0f;
+        for (int i = 0; i < all_entries.size(); i++) {
+            for (int j = 0; j < reviews.size(); j++) {
+                if (reviews.get(j).getMovie().getMovieName().compareTo(all_entries.get(i).getMovie().getMovieName()) == 0) {
+                    average = average + Integer.parseInt(reviews.get(j).getRating());
+                    amount = amount + 1;
+                }
+            }
+            if (amount > 0) {
+                calculated_average = average / amount;
+                String[] movie_info = {all_entries.get(i).getMovie().getMovieName(), String.valueOf(calculated_average)};
+                sorted_movies.add(movie_info);
+                average = 0;
+                amount = 0;
+            }
+        }
+        ArrayList<String[]> sort = new ArrayList<>();
+        if (!sorted_movies.isEmpty()) {
+            for (int i = 0; i < sorted_movies.size(); i++) {
+                if (sort.isEmpty()) {
+                    sort.add(sorted_movies.get(i));
+                } else {
+                    int k = 0;
+                    for (int j = 0; j < sort.size(); j++) {
+                        if (Float.valueOf(sorted_movies.get(i)[1]) >= Float.valueOf(sort.get(j)[1])) {
+                            sort.add(j, sorted_movies.get(i));
+                            k = 1;
+                            break;
+                        }
+                    }
+                    if(k == 0){
+                        sort.add(sorted_movies.get(i));
+                    }
+                }
+            }
+        }
+        ArrayList<String> sorted_movies_back = new ArrayList<>();
+        for(int i = 0; i<sort.size(); i++){
+            sorted_movies_back.add(sort.get(i)[1] + " " +sort.get(i)[0]);
+        }
+        return sorted_movies_back;
+    }
     public ArrayList<Entry> getEntries() {
         return all_entries;
     }
 
     public void setEntry(Entry entry) {
     }
-/*
-    public String getCurrentShows() {
-        return ; //???
-    }
-
-    public String listMoviesByRating() {
-        return ; //???
-    }
-*/
 }
