@@ -41,6 +41,25 @@ public class Settings extends AppCompatActivity {
         new_username = findViewById(R.id.change_username);
         new_password = findViewById(R.id.change_password);
 
+        //Get data that was sent from Main menu
+        data =(DataTransverClass) getIntent().getSerializableExtra("object");
+        manager = (MovieManager) getIntent().getSerializableExtra("manager");
+        user = (User) getIntent().getSerializableExtra("user");
+        System.out.println(data.getText());
+
+        //Set listener on account deletion button
+        delete_account.setOnClickListener(view -> {
+            //Method to delete account
+            deleteAccount();
+        });
+        //Listener for sign out button
+        sign_out.setOnClickListener(view -> {
+            //To sign out method
+            signOut();
+        });
+
+        //to edit the username and password of user
+        modify_info.setOnClickListener(view -> enableEditing());
 
 
         Button changeLang = findViewById(R.id.changeMyLang);
@@ -51,52 +70,20 @@ public class Settings extends AppCompatActivity {
                 showChangeLanguageDialog();
             }
         });
-
-
-        //Get data that was sent from Main menu
-        data =(DataTransverClass) getIntent().getSerializableExtra("object");
-        manager = (MovieManager) getIntent().getSerializableExtra("manager");
-        user = (User) getIntent().getSerializableExtra("user");
-        System.out.println(data.getText());
-
-        /*delete_account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Method to delete account
-                deleteAccount();
-            }
-        });*/
-
-        //Set listener on account deletion button
-        delete_account.setOnClickListener(view -> {
-            //Method to delete account
-            deleteAccount();
-        });
-        //Listener for sign out button
-
-        /*sign_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //To sign out method
-                signOut();
-            }*/
-
-        sign_out.setOnClickListener(view -> {
-            //To sign out method
-            signOut();
-        });
-
-        /*modify_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableEditing();
-            }
-        });*/
-
-        //to edit the username and password of user
-        modify_info.setOnClickListener(view -> enableEditing());
     }
 
+    //TODO: Method to delete account
+    public void deleteAccount(){
+        System.out.println("Deleted Account");
+    }
+    //TODO: Method to sign out
+    public void signOut(){
+        System.out.println("Signed out");
+    }
+    //TODO: Method to enable editing, this will reload the same settings page and make the edit fields editable and makes delete account button pressable
+    public void enableEditing(){
+        System.out.println("Editing on!");
+    }
 
     private void showChangeLanguageDialog() {
         //Array of different languages
@@ -146,7 +133,6 @@ public class Settings extends AppCompatActivity {
         setLocale(language);
     }
 
-
     @Override
     //When arrow back of phone is pressed it goes back to the previous page which is Main menu,
     //Any edits in the Settings need to not be done, as the settings get set only when pressing the
@@ -164,17 +150,5 @@ public class Settings extends AppCompatActivity {
         setResult(RESULT_OK, intent);
         //Finish send the changes to previous activity
         finish();
-    }
-    //TODO: Method to delete account
-    public void deleteAccount(){
-        System.out.println("Deleted Account");
-    }
-    //TODO: Method to sign out
-    public void signOut(){
-        System.out.println("Signed out");
-    }
-    //TODO: Method to enable editing, this will reload the same settings page and make the edit fields editable and makes delete account button pressable
-    public void enableEditing(){
-        System.out.println("Editing on!");
     }
 }

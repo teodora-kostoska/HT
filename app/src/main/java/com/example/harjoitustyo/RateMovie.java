@@ -45,7 +45,6 @@ public class RateMovie extends AppCompatActivity {
     //Method to fill spinner with data on movies
     public void setSpinner(){
         ArrayAdapter<String> movie_list;
-        System.out.println(manager.getMovieNames().get(1));
         movie_list = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, manager.getMovieNames());
         movie_list.setDropDownViewResource(android.R.layout.simple_spinner_item);
         movie_name.setAdapter(movie_list);
