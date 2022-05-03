@@ -39,6 +39,7 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        loadLocale();
         //Find the corresponding views by id
         modify_info =findViewById(R.id.edit_user_info);
         sign_out = findViewById(R.id.sign_out);
