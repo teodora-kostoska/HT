@@ -5,11 +5,11 @@ import java.io.Serializable;
 //All classes are serializable if they are to be transported from one activity to another
 public class Reviews implements Serializable {
     //Initialize information
-    private String time;
-    private Movie movie;
-    private String comment;
-    private String rating;
-    private User user;
+    String time;
+    Movie movie;
+    String comment;
+    String rating;
+    User user;
 
     //Constructor for reviews, contains movie information, timestamp of review, rating, comment and user information
     public Reviews(Movie movie, String timestamp,String rating, String comment, User user){

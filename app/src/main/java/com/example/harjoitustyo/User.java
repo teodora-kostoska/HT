@@ -5,10 +5,10 @@ import java.io.Serializable;
 //All the objects are going to be serializable, as they need to be transported from one activity to other
 public class User implements Serializable {
     //Initialize values
-    private String name;
-    private String email;
-    private String username;
-    private String password;
+    String name;
+    String email;
+    String username;
+    String password;
     
     //User constructor
     public User(String name, String email, String username, String password) {

@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class Movie implements Serializable {
     //Initialize values
-    private String movieName;
-    private String duration;
-    private String genre;
-    private String releaseYear;
+    String movieName;
+    String duration;
+    String genre;
+    String releaseYear;
 
     //constructor
     public Movie(String movieName, String duration, String genre, String releaseDate) {

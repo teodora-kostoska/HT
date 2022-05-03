@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 //Class is used for keeping track of all movies
 public class Entry implements Serializable {
-    private Movie movie;
+    Movie movie;
 
     //Methods to get and set information as well as constructor
     public Entry(Movie movie){
