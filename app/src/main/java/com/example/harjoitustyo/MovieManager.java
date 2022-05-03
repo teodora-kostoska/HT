@@ -186,7 +186,7 @@ public class MovieManager implements Serializable {
                 }
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {
-            System.out.println("UserXML doesn't exist");
+            e.printStackTrace();
         }
         return userExistance;
     }
@@ -331,7 +331,7 @@ public class MovieManager implements Serializable {
                     k++;
                     n++;
                 }
-                OutputStreamWriter result = new OutputStreamWriter(context.openFileOutput("UserXML.txt", Context.MODE_PRIVATE));
+                OutputStreamWriter result = new OutputStreamWriter(context.openFileOutput("MovieXML.txt", Context.MODE_PRIVATE));
                 i = 0;
                 while (i < list_of_content.size()) {
                     result.write(list_of_content.get(i));
@@ -340,18 +340,19 @@ public class MovieManager implements Serializable {
                 result.close();
             } else {
                 int k = 0;
+                list_of_content.add("<movieList>\n");
                 while (k < entries.size()) {
-                    toFile = "<movieList>\n" + "<movieInfo movie_id='" + k + "'>\n" +
+                    toFile = "<movieInfo movie_id='" + k + "'>\n" +
                             "<movieTitle>" + entries.get(k).getMovie().getMovieName() + "</movieTitle>\n" +
                             "<movieDuration>" + entries.get(k).getMovie().getDuration() + "</movieDuration>\n" +
                             "<movieGenre>" + entries.get(k).getMovie().getGenre() + "</movieGenre>\n" +
                             "<movieYear>" + entries.get(k).getMovie().getReleaseYear() + "</movieYear>\n" +
-                            "</movieInfo>\n" +
-                            "</movieList>\n";
+                            "</movieInfo>\n";
                     list_of_content.add(toFile);
                     k++;
                 }
-                OutputStreamWriter result = new OutputStreamWriter(context.openFileOutput("UserXML.txt", Context.MODE_PRIVATE));
+                list_of_content.add("</movieList>\n");
+                OutputStreamWriter result = new OutputStreamWriter(context.openFileOutput("MovieXML.txt", Context.MODE_PRIVATE));
                 int i = 0;
                 while (i < list_of_content.size()) {
                     result.write(list_of_content.get(i));

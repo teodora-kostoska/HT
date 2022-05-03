@@ -84,7 +84,6 @@ public class RateMovie extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 counter = position;
                 movie = manager.getEntries().get(counter).getMovie();
-                System.out.println(manager.getEntries().get(counter).getMovie().getMovieName());
             }
 
             @Override

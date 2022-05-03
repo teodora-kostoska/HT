@@ -39,9 +39,6 @@ public class ListCommentsByMovie extends AppCompatActivity {
     public void setSpinner(){
         ArrayAdapter<String> movie_list;
         movie_list = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, manager.getMovieNames());
-        for(int i = 0; i<manager.getMovieNames().size();i++){
-            System.out.println(manager.getMovieNames().get(i));
-        }
         movie_list.setDropDownViewResource(android.R.layout.simple_spinner_item);
         comment_spinner.setAdapter(movie_list);
         comment_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

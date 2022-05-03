@@ -69,13 +69,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         loadLocale();
         manager = MovieManager.getInstance();
+        /*
         File directory = getFilesDir();
-        File file = new File(directory, "UserXML.txt");
-        file.delete();
         File file2 = new File(directory, "MovieXML.txt");
         file2.delete();
+
         File file3 = new File(directory, "ReviewsXML.txt");
         file3.delete();
+        File file = new File(directory, "UserXML.txt");
+        file.delete();
+         */
 
         //Initialize all buttons and edit text
         sign_in_button = findViewById(R.id.signIn_Button);
