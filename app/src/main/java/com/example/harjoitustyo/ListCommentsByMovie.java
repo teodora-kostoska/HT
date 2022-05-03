@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 
 public class ListCommentsByMovie extends AppCompatActivity {
+    //Get views and initialize objects
     Spinner comment_spinner;
     GridView comment_view;
     int counter;
@@ -37,15 +38,18 @@ public class ListCommentsByMovie extends AppCompatActivity {
     }
 
     public void setSpinner(){
+        //create array of movies
         ArrayAdapter<String> movie_list;
+        //create adapter
         movie_list = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, manager.getMovieNames());
         movie_list.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        //Populate adapter
         comment_spinner.setAdapter(movie_list);
         comment_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 counter = position;
-                System.out.println(manager.getEntries().get(counter).getMovie().getMovieName());
+                //set the grid with the movie name that was selected from spinner
                 setGrid(manager.getEntries().get(counter).getMovie().getMovieName());
             }
 
@@ -58,16 +62,19 @@ public class ListCommentsByMovie extends AppCompatActivity {
     }
 
     public void setGrid(String movie_name){
+        //Get the reviews where the movie name is the one selected in spinner
         ArrayList<Reviews> reviews = manager.getReviewsByMovieName(movie_name);
+        //Create adapter
         CommentAdapter adapter = new CommentAdapter(this, reviews);
+        //Populate grid
         comment_view.setAdapter(adapter);
     }
 
     public void onBackPressed(){
-        //On back press, if something was added to settings it doesn't get sent to main activity
+        //On back press go to main menu
         //Create intent
         Intent intent = new Intent();
-        //Set something in data object to check it works
+        //Set extras
         data.setText("Sending new text back from Settings!");
         intent.putExtra("object", data);
         intent.putExtra("user", user);

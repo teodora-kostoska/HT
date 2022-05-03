@@ -3,7 +3,6 @@ package com.example.harjoitustyo;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,9 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -39,7 +36,9 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        //Load language in shared preferences
         loadLocale();
+
         //Find the corresponding views by id
         modify_info =findViewById(R.id.edit_user_info);
         sign_out = findViewById(R.id.sign_out);
@@ -47,54 +46,60 @@ public class Settings extends AppCompatActivity {
         new_password = findViewById(R.id.change_password);
         new_name = findViewById(R.id.change_name);
         new_email = findViewById(R.id.change_email);
+        //Get application context to be able to access files
         context = getApplicationContext();
         to_user = findViewById(R.id.textView6);
+
         //Get data that was sent from Main menu
         data =(DataTransverClass) getIntent().getSerializableExtra("object");
         manager = (MovieManager) getIntent().getSerializableExtra("manager");
         user = (User) getIntent().getSerializableExtra("user");
         System.out.println(data.getText());
 
+        //Set the information views with the current users info, so that they can change only the values they want
         new_username.setText(user.getUsername());
         new_password.setText(user.getPassword());
         new_name.setText(user.getName());
         new_email.setText(user.getEmail());
+
         //Listener for sign out button
         sign_out.setOnClickListener(view -> {
-            //To sign out method
+            //Set current user to null -> user logged out
             user = null;
+            //Set intent to go to Main Activity (Log in page)
             Intent intent = new Intent(Settings.this, MainActivity.class);
-            //Set something in data object to check it works
+
+            //Set extra to intent so that they are transported to login page
             data.setText("Sending new text back from Settings!");
             intent.putExtra("object", data);
             intent.putExtra("user", user);
             intent.putExtra("manager",manager);
-            //Set result code and intent
+            //Start the activity -> go to log in page
             startActivity(intent);
         });
 
-        //to edit the username and password of user
+        //to edit the user information
         modify_info.setOnClickListener(view -> enableEditing());
 
-
+        //Change the language in the activity on press
         Button changeLang = findViewById(R.id.changeMyLanguage);
-        changeLang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Show list of languages, one can be selected
-                showChangeLanguageDialog();
-            }
+        changeLang.setOnClickListener(view -> {
+            //Show list of languages, one can be selected
+            showChangeLanguageDialog();
         });
     }
 
-    //TODO: Method to enable editing, this will reload the same settings page and make the edit fields editable and makes delete account button pressable
+    //Method to change the user information in movie manager
     public void enableEditing(){
         try {
             int existance = manager.editUserInformation(user,new_username.getText().toString(), new_password.getText().toString(), new_name.getText().toString(), new_email.getText().toString(), context);
+            //If existance >0 then there is some other user that already has that username and the change isn't done
             if(existance > 0){
                 to_user.setText("Username is already taken, try again!");
             }else{
+                //Otherwise the change was successful
                 to_user.setText("Modifications done successfully!");
+                //Update the current user to have the edited information
                 user = manager.getCurrentUser(new_username.getText().toString());
             }
         } catch (IOException e) {
@@ -153,7 +158,7 @@ public class Settings extends AppCompatActivity {
     @Override
     //When arrow back of phone is pressed it goes back to the previous page which is Main menu,
     //Any edits in the Settings need to not be done, as the settings get set only when pressing the
-    //TODO: save changes button
+    //edit user info button
     public void onBackPressed(){
         //On back press, if something was added to settings it doesn't get sent to main activity
         //Create intent

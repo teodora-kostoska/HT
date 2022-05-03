@@ -5,14 +5,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 import android.content.Context;
-import java.io.File;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -20,24 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.File;
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.os.StrictMode;
-import android.widget.TextView;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 
@@ -56,27 +40,23 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     Context context;
     TextView loginInfo;
+
     //Create object in order to be able to send data from one view to another
     private DataTransverClass transfer = new DataTransverClass();
+    //Initialize moviemanager and user objects
     private MovieManager manager = null;
     private User user = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //For usage of internet
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_main);
         loadLocale();
+        //Create instance of singleton movieManager
         manager = MovieManager.getInstance();
-        /*File directory = getFilesDir();
-        File file2 = new File(directory, "MovieXML.txt");
-        file2.delete();
-        File file3 = new File(directory, "ReviewsXML.txt");
-        file3.delete();
-        File file = new File(directory, "UserXML.txt");
-        file.delete();
-         */
         //Initialize all buttons and edit text
         sign_in_button = findViewById(R.id.signIn_Button);
         register_button = findViewById(R.id.register_Button);
@@ -87,8 +67,11 @@ public class MainActivity extends AppCompatActivity {
         //Set listener, so that when button is pressed it goes to Main Menu
         sign_in_button.setOnClickListener(view -> {
             int userExistance = manager.getUserFromXML(username.getText().toString(), password.getText().toString(),context);
+            //If user exists and password is okay, go to main menu
             if(userExistance == 1){
+                //load all data from files to objects
                 manager.GetMovieInfo(context);
+                //Set current user-> sign in
                 user = manager.getCurrentUser(username.getText().toString());
                 loadMainMenu();
             }else{
@@ -223,9 +206,8 @@ public class MainActivity extends AppCompatActivity {
         //Send object to second activity and wait for result from activity
         //Set intent, which is current activity and to which activity we switch
         Intent intent = new Intent(MainActivity.this, MainMenu.class);
-        //Checking functionality of data transfer object
         transfer.setText("Sending some random text from Main Activity!");
-        //Put object in Extra
+        //Put objects in Extra
         intent.putExtra("object", transfer);
         intent.putExtra("user", user);
         intent.putExtra("manager", manager);
@@ -248,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1) {
             //Check whether the returned code is what was expected
             if (resultCode == RESULT_OK) {
-                //Collect the data transfer object
+                //Collect the objects returned
                 transfer = (DataTransverClass) data.getSerializableExtra("object");
                 user = (User) data.getSerializableExtra("user");
                 manager = (MovieManager) data.getSerializableExtra("manager");
@@ -258,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
         }else if(requestCode == 4){
             //Check result code
             if (resultCode == RESULT_OK) {
-                //Collect data from object
+                //Collect data from objects
                 transfer = (DataTransverClass) data.getSerializableExtra("object");
                 manager = (MovieManager) data.getSerializableExtra("manager");
                 System.out.println(transfer.getText());

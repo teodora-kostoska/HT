@@ -20,33 +20,37 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
         //Find correct views by id from layout
         settings = findViewById(R.id.settings_button);
         list_movie = findViewById(R.id.list_movies_button);
         rate_movie = findViewById(R.id.rate_movie_button);
         comments_button = findViewById(R.id.movie_comments_button);
+
         //Get any data that was sent from login i.e user information
         data =(DataTransverClass) getIntent().getSerializableExtra("object");
         user = (User) getIntent().getSerializableExtra("user");
         manager = (MovieManager) getIntent().getSerializableExtra("manager");
         System.out.println(data.getText());
+
         //Set on click listener for settings button, so that when settings button is pressed the settings activity is launched
         settings.setOnClickListener(view -> {
             //Send object to second activity and wait for result from activity
             //Set intent which contains information on the current activity and the target activity
             Intent intent = new Intent(MainMenu.this, Settings.class);
-            //Check data transfer object workings
+            //Set extras to transfer objects to settings
             data.setText("Sending some random text from Main menu!");
             intent.putExtra("object", data);
             intent.putExtra("manager", manager);
             intent.putExtra("user", user);
             startActivityForResult(intent, 2);
         });
+        //On click listener to go to the movie listing activity
         list_movie.setOnClickListener(view -> {
             //Send object to second activity and wait for result from activity
             //Set intent which contains information on the current activity and the target activity
             Intent intent = new Intent(MainMenu.this, ListMoviesByRating.class);
-            //Check data transfer object workings
+            //Set extras to transfer objects to activity
             data.setText("Sending some random text from Main menu!");
             intent.putExtra("object", data);
             intent.putExtra("manager", manager);
@@ -67,21 +71,19 @@ public class MainMenu extends AppCompatActivity {
             //Send object to second activity and wait for result from activity
             //Set intent which contains information on the current activity and the target activity
             Intent intent = new Intent(MainMenu.this, ListCommentsByMovie.class);
-            //Check data transfer object workings
+            //Object as extras to be sent to comment activity
             data.setText("Sending some random text from Main menu!");
             intent.putExtra("object", data);
             intent.putExtra("manager", manager);
             intent.putExtra("user", user);
             startActivityForResult(intent, 2);
         });
-
     }
 
     @Override
-    //When back arrow pressed go back to login page, TODO: but don't sign user out!
-    //Any changes done to data object don't need to be sent to login page
+    //When back arrow pressed go back to login page
     public void onBackPressed(){
-        //On back press, if something was added to settings it doesn't get sent to main activity
+        //On back press, go to previous activity
         Intent intent = new Intent();
         data.setText("Sending new text back from Main Menu!");
         intent.putExtra("object", data);

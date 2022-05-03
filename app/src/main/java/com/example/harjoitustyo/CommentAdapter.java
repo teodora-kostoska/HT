@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+//Adapter that is used to populate the comments by movie activities custom grid view
 public class CommentAdapter extends ArrayAdapter<Reviews> {
     public CommentAdapter(@NonNull Context context, ArrayList<Reviews> reviewsArrayList) {
         super(context, 0, reviewsArrayList);
@@ -26,6 +27,7 @@ public class CommentAdapter extends ArrayAdapter<Reviews> {
             listitemView = LayoutInflater.from(getContext()).inflate(R.layout.activity_listview, parent, false);
         }
         Reviews reviews = getItem(position);
+        //Add correct values to the correct view
         TextView firstView = listitemView.findViewById(R.id.firstText);
         TextView secondView = listitemView.findViewById(R.id.secondText);
         TextView thirdView = listitemView.findViewById(R.id.thirdText);

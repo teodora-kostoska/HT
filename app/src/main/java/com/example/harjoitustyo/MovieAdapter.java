@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+//This is adapter to populate the custom grid view in the list movies by review activity
 public class MovieAdapter extends ArrayAdapter<Movie> {
     public MovieAdapter(@NonNull Context context, ArrayList<Movie> movieArrayList) {
         super(context, 0, movieArrayList);

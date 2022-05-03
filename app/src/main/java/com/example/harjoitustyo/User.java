@@ -2,19 +2,22 @@ package com.example.harjoitustyo;
 
 import java.io.Serializable;
 
+//All the objects are going to be serializable, as they need to be transported from one activity to other
 public class User implements Serializable {
-    String name;
-    String email;
-    String username;
-    String password;
-
+    //Initialize values
+    private String name;
+    private String email;
+    private String username;
+    private String password;
+    
+    //User constructor
     public User(String name, String email, String username, String password) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
     }
-
+    //Methods to fetch or set the information in the object
     public String getEmail() {
         return email;
     }
