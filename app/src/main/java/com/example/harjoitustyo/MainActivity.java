@@ -69,17 +69,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         loadLocale();
         manager = MovieManager.getInstance();
-        /*
-        File directory = getFilesDir();
+        /*File directory = getFilesDir();
         File file2 = new File(directory, "MovieXML.txt");
         file2.delete();
-
         File file3 = new File(directory, "ReviewsXML.txt");
         file3.delete();
         File file = new File(directory, "UserXML.txt");
         file.delete();
-         */
-
+        */
         //Initialize all buttons and edit text
         sign_in_button = findViewById(R.id.signIn_Button);
         register_button = findViewById(R.id.register_Button);
@@ -224,13 +221,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadMainMenu(){
         //Send object to second activity and wait for result from activity
-        //TODO: Should be probably edited so that it doesn't wait for response from activity, as this is only the log in page
         //Set intent, which is current activity and to which activity we switch
         Intent intent = new Intent(MainActivity.this, MainMenu.class);
         //Checking functionality of data transfer object
         transfer.setText("Sending some random text from Main Activity!");
         //Put object in Extra
-        //TODO: send user object
         intent.putExtra("object", transfer);
         intent.putExtra("user", user);
         intent.putExtra("manager", manager);
@@ -247,7 +242,6 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     //On results from Main Menu or Register collect the data that was sent
-    //TODO: Maybe no need for the result from Main menu
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //From Main menu as request code is 1 for Main menu
@@ -272,17 +266,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    /*Spinneriä on noi loput
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String choice = adapterView.getItemAtPosition(i).toString();
-        Toast.makeText(getApplicationContext(), choice, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }*/
 }

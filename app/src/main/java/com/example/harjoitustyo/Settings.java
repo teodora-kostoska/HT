@@ -22,7 +22,6 @@ public class Settings extends AppCompatActivity {
     //Initialize views and data transfer object
     Button modify_info;
     Button sign_out;
-    Button delete_account;
     EditText new_username;
     EditText new_password;
     private DataTransverClass data = null;
@@ -37,7 +36,6 @@ public class Settings extends AppCompatActivity {
         //Find the corresponding views by id
         modify_info =findViewById(R.id.edit_user_info);
         sign_out = findViewById(R.id.sign_out);
-        delete_account = findViewById(R.id.delete_account);
         new_username = findViewById(R.id.change_username);
         new_password = findViewById(R.id.change_password);
 
@@ -47,22 +45,25 @@ public class Settings extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         System.out.println(data.getText());
 
-        //Set listener on account deletion button
-        delete_account.setOnClickListener(view -> {
-            //Method to delete account
-            deleteAccount();
-        });
         //Listener for sign out button
         sign_out.setOnClickListener(view -> {
             //To sign out method
-            signOut();
+            user = null;
+            Intent intent = new Intent(Settings.this, MainActivity.class);
+            //Set something in data object to check it works
+            data.setText("Sending new text back from Settings!");
+            intent.putExtra("object", data);
+            intent.putExtra("user", user);
+            intent.putExtra("manager",manager);
+            //Set result code and intent
+            startActivity(intent);
         });
 
         //to edit the username and password of user
         modify_info.setOnClickListener(view -> enableEditing());
 
 
-        Button changeLang = findViewById(R.id.changeMyLang);
+        Button changeLang = findViewById(R.id.changeMyLanguage);
         changeLang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,14 +73,6 @@ public class Settings extends AppCompatActivity {
         });
     }
 
-    //TODO: Method to delete account
-    public void deleteAccount(){
-        System.out.println("Deleted Account");
-    }
-    //TODO: Method to sign out
-    public void signOut(){
-        System.out.println("Signed out");
-    }
     //TODO: Method to enable editing, this will reload the same settings page and make the edit fields editable and makes delete account button pressable
     public void enableEditing(){
         System.out.println("Editing on!");

@@ -7,6 +7,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
@@ -110,7 +111,7 @@ public class MovieManager implements Serializable {
             result.close();
         }
         else {
-            toFile = "<userList>\n" +"<userInfo user_id='0'>\n" +
+            toFile = "<?xml version='1.0' encoding='UTF-8'?>\n"+"<userList>\n" +"<userInfo user_id='0'>\n" +
                     "<name>" + name + "</name>\n" +
                     "<username>" + username + "</username>\n" +
                     "<email>" + email + "</email>\n" +
@@ -190,6 +191,27 @@ public class MovieManager implements Serializable {
         }
         return userExistance;
     }
+
+    public int editUserInformation(User current_user, String username, String password, Context context){
+        int userExist = getUserFromXML(username,password, context);
+        if((userExist == 1 || userExist ==2)&&username.compareTo(current_user.getUsername())!=0){
+            return userExist;
+        }
+        for(int i = 0; i<users.size();i++){
+            if(users.get(i).getUsername().compareTo(username)==0){
+                users.get(i).setUsername(username);
+                users.get(i).setPassword(password);
+            }
+        }
+        for(int i = 0; i<reviews.size();i++){
+            if(reviews.get(i).getUser().getUsername().compareTo(username)==0){
+                reviews.get(i).getUser().setUsername(username);
+                reviews.get(i).getUser().setPassword(password);
+            }
+        }
+        //Next same thing for the values in the files
+        return userExist;
+    }
     /*
     public String hashPassword(String password){
         String generatedPassword = "";
@@ -263,7 +285,7 @@ public class MovieManager implements Serializable {
                     }
                 }
             } catch (ParserConfigurationException | IOException | SAXException e) {
-                System.out.println("MovieXML doesn't exist");
+                e.printStackTrace();
             }
             int k = 0;
             for(int i = 0; i<entries.size(); i++){
@@ -340,13 +362,14 @@ public class MovieManager implements Serializable {
                 result.close();
             } else {
                 int k = 0;
+                list_of_content.add("<?xml version='1.0' encoding='UTF-8'?>\n");
                 list_of_content.add("<movieList>\n");
-                while (k < entries.size()) {
+                while (k < all_entries.size()) {
                     toFile = "<movieInfo movie_id='" + k + "'>\n" +
-                            "<movieTitle>" + entries.get(k).getMovie().getMovieName() + "</movieTitle>\n" +
-                            "<movieDuration>" + entries.get(k).getMovie().getDuration() + "</movieDuration>\n" +
-                            "<movieGenre>" + entries.get(k).getMovie().getGenre() + "</movieGenre>\n" +
-                            "<movieYear>" + entries.get(k).getMovie().getReleaseYear() + "</movieYear>\n" +
+                            "<movieTitle>" + all_entries.get(k).getMovie().getMovieName() + "</movieTitle>\n" +
+                            "<movieDuration>" + all_entries.get(k).getMovie().getDuration() + "</movieDuration>\n" +
+                            "<movieGenre>" + all_entries.get(k).getMovie().getGenre() + "</movieGenre>\n" +
+                            "<movieYear>" + all_entries.get(k).getMovie().getReleaseYear() + "</movieYear>\n" +
                             "</movieInfo>\n";
                     list_of_content.add(toFile);
                     k++;
@@ -473,7 +496,7 @@ public class MovieManager implements Serializable {
             result.close();
         }
         else {
-            toFile = "<reviewList>\n" +"<reviewInfo review_id='0'>\n" +
+            toFile = "<?xml version='1.0' encoding='UTF-8'?>\n"+"<reviewList>\n" +"<reviewInfo review_id='0'>\n" +
                     "<movieTitle>" + movie.getMovieName() + "</movieTitle>\n" +
                     "<movieDuration>" + movie.getDuration() + "</movieDuration>\n" +
                     "<movieGenre>" + movie.getGenre() + "</movieGenre>\n" +
