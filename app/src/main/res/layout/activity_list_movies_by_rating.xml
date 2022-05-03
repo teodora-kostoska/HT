@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ListMoviesByRating">
 
-    <ListView
+    <GridView
         android:id="@+id/list_movies"
-        android:layout_width="409dp"
-        android:layout_height="600dp"
+        android:layout_width="401dp"
+        android:layout_height="580dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:numColumns="1"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

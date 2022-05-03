@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.sql.Array;
@@ -14,7 +15,7 @@ public class ListMoviesByRating extends AppCompatActivity {
     private DataTransverClass data = null;
     private MovieManager manager = null;
     private User user = null;
-    ListView list_movies;
+    GridView list_movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,11 @@ public class ListMoviesByRating extends AppCompatActivity {
         manager = (MovieManager) getIntent().getSerializableExtra("manager");
         user = (User) getIntent().getSerializableExtra("user");
         System.out.println(data.getText());
-        createList();
+        populateGrid();
     }
-    public void createList(){
-        ArrayList<String> movies = manager.sortMoviesByRating();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_listview, movies);
+    public void populateGrid(){
+        ArrayList<Movie> movies = manager.sortMoviesByRating();
+        MovieAdapter adapter = new MovieAdapter(this, movies);
         list_movies.setAdapter(adapter);
     }
     @Override

@@ -33,7 +33,6 @@ public class MovieManager implements Serializable {
     ArrayList <Entry> entries;
     ArrayList <Entry> all_entries; //Entries that are in file also, TODO: Make sure they are unique!!
     ArrayList <Reviews> reviews;
-    ArrayList<String[]> sorted_movies;
     int add_movies_to_xml;
 
     private MovieManager() {
@@ -41,7 +40,6 @@ public class MovieManager implements Serializable {
         entries = new ArrayList<>();
         all_entries = new ArrayList<>();
         reviews = new ArrayList<>();
-        sorted_movies = new ArrayList<>();
         getMoviesFromFinnkino();
         add_movies_to_xml = 0;
     }
@@ -491,8 +489,8 @@ public class MovieManager implements Serializable {
 
     }
 
-    public ArrayList<String> sortMoviesByRating() {
-        sorted_movies.clear();
+    public ArrayList<Movie> sortMoviesByRating() {
+        ArrayList<String[]> sorted_movies = new ArrayList<>();
         float average = 0.0f;
         float amount = 0.0f;
         float calculated_average = 0.0f;
@@ -531,16 +529,18 @@ public class MovieManager implements Serializable {
                 }
             }
         }
-        ArrayList<String> sorted_movies_back = new ArrayList<>();
+        ArrayList<Movie> sorted_movies_back = new ArrayList<>();
+        sorted_movies_back.add(new Movie("Rating and Movie name", "Movie duration", "Movie genre", "Movie released (year)"));
         for(int i = 0; i<sort.size(); i++){
-            sorted_movies_back.add(sort.get(i)[1] + " " +sort.get(i)[0]);
+            for(int j = 0; j<all_entries.size();j++){
+                if(all_entries.get(j).getMovie().getMovieName().compareTo(sort.get(i)[0])==0) {
+                    sorted_movies_back.add(new Movie(sort.get(i)[1] + " " + sort.get(i)[0],all_entries.get(j).getMovie().getDuration(),all_entries.get(j).getMovie().getGenre(),all_entries.get(j).getMovie().getReleaseYear()));
+                }
+            }
         }
         return sorted_movies_back;
     }
     public ArrayList<Entry> getEntries() {
         return all_entries;
-    }
-
-    public void setEntry(Entry entry) {
     }
 }
