@@ -253,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 //Collect the data transfer object
                 transfer = (DataTransverClass) data.getSerializableExtra("object");
+                user = (User) data.getSerializableExtra("user");
                 manager = (MovieManager) data.getSerializableExtra("manager");
                 System.out.println(transfer.getText());
             }

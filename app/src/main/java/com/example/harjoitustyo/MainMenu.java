@@ -12,7 +12,7 @@ public class MainMenu extends AppCompatActivity {
     Button settings;
     Button list_movie;
     Button rate_movie;
-    Button show_current;
+    Button comments_button;
     private DataTransverClass data = null;
     private User user = null;
     private MovieManager manager = null;
@@ -24,7 +24,7 @@ public class MainMenu extends AppCompatActivity {
         settings = findViewById(R.id.settings_button);
         list_movie = findViewById(R.id.list_movies_button);
         rate_movie = findViewById(R.id.rate_movie_button);
-        show_current = findViewById(R.id.current_button);
+        comments_button = findViewById(R.id.movie_comments_button);
         //Get any data that was sent from login i.e user information
         data =(DataTransverClass) getIntent().getSerializableExtra("object");
         user = (User) getIntent().getSerializableExtra("user");
@@ -42,7 +42,6 @@ public class MainMenu extends AppCompatActivity {
             intent.putExtra("user", user);
             startActivityForResult(intent, 2);
         });
-        //TODO:No activity for this yet (List movies by rating)
         list_movie.setOnClickListener(view -> {
             //Send object to second activity and wait for result from activity
             //Set intent which contains information on the current activity and the target activity
@@ -57,7 +56,6 @@ public class MainMenu extends AppCompatActivity {
         //set on click listener for when rate movie button is pressed
         rate_movie.setOnClickListener(view -> {
             //Send object to second activity and wait for result from activity
-            //TODO: Probably no need to wait for result from rate movie, as this should be done through db
             Intent intent = new Intent(MainMenu.this, RateMovie.class);
             data.setText("Sending some random text from Main Menu!");
             intent.putExtra("object", data);
@@ -65,9 +63,16 @@ public class MainMenu extends AppCompatActivity {
             intent.putExtra("user",user);
             startActivityForResult(intent, 2);
         });
-        //TODO: No activity for this yet (Create activity for Showing of movies currently in theatre)
-        show_current.setOnClickListener(view -> {
-
+        comments_button.setOnClickListener(view -> {
+            //Send object to second activity and wait for result from activity
+            //Set intent which contains information on the current activity and the target activity
+            Intent intent = new Intent(MainMenu.this, ListCommentsByMovie.class);
+            //Check data transfer object workings
+            data.setText("Sending some random text from Main menu!");
+            intent.putExtra("object", data);
+            intent.putExtra("manager", manager);
+            intent.putExtra("user", user);
+            startActivityForResult(intent, 2);
         });
 
     }
@@ -80,6 +85,7 @@ public class MainMenu extends AppCompatActivity {
         Intent intent = new Intent();
         data.setText("Sending new text back from Main Menu!");
         intent.putExtra("object", data);
+        intent.putExtra("user", user);
         intent.putExtra("manager", manager);
         setResult(RESULT_OK, intent);
         finish();

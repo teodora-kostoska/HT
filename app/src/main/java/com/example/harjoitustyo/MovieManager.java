@@ -406,6 +406,7 @@ public class MovieManager implements Serializable {
                         NodeList nodeTimestamp = element2.getElementsByTagName("timestamp").item(0).getChildNodes();
                         NodeList nodeRating = element2.getElementsByTagName("rating").item(0).getChildNodes();
                         NodeList nodeComment = element2.getElementsByTagName("comment").item(0).getChildNodes();
+                        NodeList nodeUsername = element2.getElementsByTagName("username").item(0).getChildNodes();
                         Node nameNode = nodeName.item(0);
                         Node durationNode = nodeDuration.item(0);
                         Node genreNode = nodeGenre.item(0);
@@ -413,7 +414,9 @@ public class MovieManager implements Serializable {
                         Node timestampNode = nodeTimestamp.item(0);
                         Node ratingNode = nodeRating.item(0);
                         Node commentNode = nodeComment.item(0);
-                        reviews.add(new Reviews(new Movie(nameNode.getNodeValue(), durationNode.getNodeValue(), genreNode.getNodeValue(), yearNode.getNodeValue()), timestampNode.getNodeValue(),ratingNode.getNodeValue(),commentNode.getNodeValue()));
+                        Node usernameNode = nodeUsername.item(0);
+                        User user = getCurrentUser(usernameNode.getNodeValue());
+                        reviews.add(new Reviews(new Movie(nameNode.getNodeValue(), durationNode.getNodeValue(), genreNode.getNodeValue(), yearNode.getNodeValue()), timestampNode.getNodeValue(),ratingNode.getNodeValue(),commentNode.getNodeValue(), user));
                     }
                 }
             } catch (ParserConfigurationException | IOException | SAXException e) {
@@ -423,12 +426,12 @@ public class MovieManager implements Serializable {
 
     }
 
-    public void setReviewToXML(Context context, Movie movie, String rating, String comment) throws IOException{
+    public void setReviewToXML(Context context, Movie movie, String rating, String comment, User user) throws IOException{
         String toFile;
         SimpleDateFormat date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
         String timeStamp = date.format(new Date());
         //Create user object
-        reviews.add(new Reviews(movie, timeStamp, rating, comment));
+        reviews.add(new Reviews(movie, timeStamp, rating, comment, user));
         //Creates new document
         File file = new File(context.getFilesDir(), "ReviewsXML.txt");
         if(file.exists()){
@@ -457,6 +460,7 @@ public class MovieManager implements Serializable {
                     "<timestamp>" + timeStamp + "</timestamp>\n"+
                     "<rating>" + rating + "</rating>\n"+
                     "<comment>" + comment + "</comment>\n"+
+                    "<username>" + user.getUsername() + "</username>\n"+
                     "</reviewInfo>\n";
             list_of_content.add((i-1), toFile);
             OutputStreamWriter result = new OutputStreamWriter(context.openFileOutput("ReviewsXML.txt", Context.MODE_PRIVATE));
@@ -476,6 +480,7 @@ public class MovieManager implements Serializable {
                     "<timestamp>" + timeStamp + "</timestamp>\n"+
                     "<rating>" + rating + "</rating>\n"+
                     "<comment>" + comment + "</comment>\n"+
+                    "<username>" + user.getUsername() + "</username>\n"+
                     "</reviewInfo>\n"+
                     "</reviewList>\n";
             OutputStreamWriter result = new OutputStreamWriter(context.openFileOutput("ReviewsXML.txt", Context.MODE_PRIVATE));
@@ -485,8 +490,14 @@ public class MovieManager implements Serializable {
         }
     }
 
-    public void getReviewsByMovieName(){
-
+    public ArrayList<Reviews> getReviewsByMovieName(String movie_name){
+        ArrayList<Reviews> return_reviews = new ArrayList<>();
+        for(int i = 0; i<reviews.size();i++){
+            if(reviews.get(i).getMovie().getMovieName().compareTo(movie_name)==0){
+                return_reviews.add(reviews.get(i));
+            }
+        }
+        return return_reviews;
     }
 
     public ArrayList<Movie> sortMoviesByRating() {

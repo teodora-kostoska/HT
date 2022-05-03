@@ -97,7 +97,7 @@ public class RateMovie extends AppCompatActivity {
     //Method in order to send comments to correct places
     public void sendRating(){
         try {
-            manager.setReviewToXML(context, movie,rating_value, movie_comment.getText().toString());
+            manager.setReviewToXML(context, movie,rating_value, movie_comment.getText().toString(), user);
             System.out.println("Rating sent!");
         } catch (IOException e) {
             e.printStackTrace();
