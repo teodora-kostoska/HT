@@ -8,12 +8,12 @@
     <string name="username">Käyttäjänimi</string>
     <string name="buttonCreateUser">Luo käyttäjä</string>
     <string name="changeLang">Vaihda kieli</string>
-    <string name="spinnerListMoviesByRating">Listaa elokuvat arvostelun mukaan</string>
+    <string name="spinnerListMoviesByRating">Listaa arvostelun mukaan</string>
     <string name="movieApp">Elokuva-applikaatio</string>
     <string name="signIn">Kirjaudu sisään</string>
     <string name="mainPage">Etusivu</string>
     <string name="showCurrentMovies">Näytä nykyiset elokuvat</string>
-    <string name="listMoviesByRating">Listaa elokuvat arvostelun mukaan</string>
+    <string name="listMoviesByRating">Listaa arvostelun mukaan</string>
     <string name="rateAMovie">Arvostele elokuva</string>
     <string name="settings">Asetukset</string>
     <string name="comment">Kommentti</string>
@@ -34,20 +34,21 @@
     <string name="loginUsingFingerprintAuthentication">"Kirjaudu sormenjäljellä"</string>
     <string name="userAppPassword">Kirjaudu salasanalla</string>
 
-    <string name="movie_app">Movie app</string>
-    <string name="give_rating">Give Rating</string>
-    <string name="rate_a_movie">Rate a movie</string>
-    <string name="change_username">Change username</string>
-    <string name="change_password">Change password</string>
-    <string name="delete_account">Delete account</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="edit_user_info">Edit User Info</string>
-    <string name="sign_in">Sign In</string>
-    <string name="textview">TextView</string>
-    <string name="main_page">Main page</string>
-    <string name="show_current_movies">Show current movies</string>
-    <string name="list_movies_by_rating">List movies by rating</string>
-    <string name="create_user">Create user</string>
+    <string name="movie_app">Elokuva-applikaatio</string>
+    <string name="give_rating">Anna arvostelu</string>
+    <string name="rate_a_movie">Arvioi elokuva</string>
+    <string name="change_username">Vaihda käyttäjänimi</string>
+    <string name="change_password">Vaihda salasana</string>
+    <string name="delete_account">Poista käyttäjä</string>
+    <string name="sign_out">Kirjaudu ulos</string>
+    <string name="edit_user_info">Muuta käyttäjän tietoja</string>
+    <string name="sign_in">Kirjaudu sisään</string>
+    <string name="textview"> </string>
+    <string name="main_page">Etusivu</string>
+    <string name="show_current_movies">Näytä nykyiset elokuvat</string>
+    <string name="list_movies_by_rating">Listaa arvostelun mukaan</string>
+    <string name="create_user">Luo käyttäjä</string>
+    <string name="showMovieComments">Näytä elokuvien kommentit </string>
 
     <!--Finnish translations-->
 

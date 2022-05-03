@@ -31,7 +31,6 @@
     <string name="biometricAuthentication">Biometric authentication</string>
     <string name="loginUsingFingerprintAuthentication">"Login using fingerprint authentication"</string>
     <string name="userAppPassword">User App Password</string>
-
     <string name="movie_app">Movie app</string>
     <string name="give_rating">Give Rating</string>
     <string name="rate_a_movie">Rate a movie</string>
@@ -48,6 +47,7 @@
     <string name="show_current_movies">Show current movies</string>
     <string name="list_movies_by_rating">List movies by rating</string>
     <string name="create_user">Create user</string>
+    <string name="showMovieComments">Show Movie Comments</string>
 
     <string-array name="movies">
         <item>Batman</item>
