@@ -45,7 +45,6 @@ public class ListCommentsByMovie extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 counter = position;
-                Movie movie = manager.getEntries().get(counter).getMovie();
                 System.out.println(manager.getEntries().get(counter).getMovie().getMovieName());
                 setGrid(manager.getEntries().get(counter).getMovie().getMovieName());
             }

@@ -71,7 +71,6 @@ public class RateMovie extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 rating_value = rating_list.get(i);
-                System.out.println(rating_list.get(i));
             }
 
             @Override

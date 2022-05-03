@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         file3.delete();
         File file = new File(directory, "UserXML.txt");
         file.delete();
-        */
+         */
         //Initialize all buttons and edit text
         sign_in_button = findViewById(R.id.signIn_Button);
         register_button = findViewById(R.id.register_Button);

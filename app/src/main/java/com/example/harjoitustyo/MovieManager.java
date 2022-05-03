@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -88,8 +89,9 @@ public class MovieManager implements Serializable {
             int i = 0;
             int y = 0;
             while(i< list_of_content.size()){
-                if(list_of_content.get(i).equals("</userList>"))
+                if(list_of_content.get(i).equals("</userList>")) {
                     break;
+                }
                 if(list_of_content.get(i).contains("</userInfo>")){
                     y = y+1;
                 }
@@ -192,46 +194,92 @@ public class MovieManager implements Serializable {
         return userExistance;
     }
 
-    public int editUserInformation(User current_user, String username, String password, Context context){
+    public int editUserInformation(User current_user, String username, String password,String name, String email, Context context) throws IOException {
         int userExist = getUserFromXML(username,password, context);
-        if((userExist == 1 || userExist ==2)&&username.compareTo(current_user.getUsername())!=0){
-            return userExist;
+        if(userExist == 1 || userExist ==2){
+            if(current_user.getUsername().compareTo(username) != 0) {
+                return userExist;
+            }
+            userExist = 0;
         }
         for(int i = 0; i<users.size();i++){
-            if(users.get(i).getUsername().compareTo(username)==0){
+            if(users.get(i).getUsername().compareTo(current_user.getUsername())==0){
                 users.get(i).setUsername(username);
                 users.get(i).setPassword(password);
+                users.get(i).setFirstName(name);
+                users.get(i).setEmail(email);
             }
         }
         for(int i = 0; i<reviews.size();i++){
-            if(reviews.get(i).getUser().getUsername().compareTo(username)==0){
+            if(reviews.get(i).getUser().getUsername().compareTo(current_user.getUsername())==0){
                 reviews.get(i).getUser().setUsername(username);
                 reviews.get(i).getUser().setPassword(password);
+                reviews.get(i).getUser().setFirstName(name);
+                reviews.get(i).getUser().setEmail(email);
             }
         }
         //Next same thing for the values in the files
+        String toFile;
+        File file = new File(context.getFilesDir(), "UserXML.txt");
+        if(file.exists()){
+            List<String> list_of_content = new ArrayList<>();
+            InputStream in = context.openFileInput("UserXML.txt");
+            BufferedReader r = new BufferedReader(new InputStreamReader(in));
+            String output;
+            while((output = r.readLine()) != null){
+                list_of_content.add(output + "\n");
+            }
+            int i = 0;
+            while(i< list_of_content.size()){
+                if(list_of_content.get(i).compareTo("<username>"+current_user.getUsername()+"</username>\n")==0) {
+                    break;
+                }
+                i++;
+            }
+            toFile = "<username>" + username + "</username>\n";
+            String new_pw = "<password>" + password + "</password>\n";
+            String new_name = "<name>" + name + "</name>\n";
+            String new_email = "<email>" + email + "</email>\n";
+            list_of_content.set(i,toFile);
+            list_of_content.set(i+2, new_pw);
+            list_of_content.set(i-1, new_name);
+            list_of_content.set(i+1, new_email);
+            OutputStreamWriter result = new OutputStreamWriter(context.openFileOutput("UserXML.txt", Context.MODE_PRIVATE));
+            i = 0;
+            while(i < list_of_content.size()){
+                result.write(list_of_content.get(i));
+                i++;
+            }
+            result.close();
+            File file2 = new File(context.getFilesDir(), "ReviewsXML.txt");
+            if(file2.exists()) {
+                list_of_content.clear();
+                InputStream inp = context.openFileInput("ReviewsXML.txt");
+                BufferedReader read = new BufferedReader(new InputStreamReader(inp));
+                String output2;
+                while ((output2 = read.readLine()) != null) {
+                    list_of_content.add(output2 + "\n");
+                }
+                i = 0;
+                while (i < list_of_content.size()) {
+                    if (list_of_content.get(i).equals("<username>" + current_user.getUsername() + "</username>\n")) {
+                        break;
+                    }
+                    i++;
+                }
+                toFile = "<username>" + username + "</username>\n";
+                list_of_content.set(i, toFile);
+                OutputStreamWriter result2 = new OutputStreamWriter(context.openFileOutput("ReviewsXML.txt", Context.MODE_PRIVATE));
+                i = 0;
+                while (i < list_of_content.size()) {
+                    result2.write(list_of_content.get(i));
+                    i++;
+                }
+                result2.close();
+            }
+        }
         return userExist;
     }
-    /*
-    public String hashPassword(String password){
-        String generatedPassword = "";
-        try {
-            //Salt
-            byte[] salt = new byte[16];
-            random.nextBytes(salt);
-            //instance for hashing using SHA-256
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(salt);
-            byte[] bytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
-            for (int i = 0; i < bytes.length; i++) {
-                generatedPassword = generatedPassword+Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1);
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
-     */
     public void getMoviesFromFinnkino(){
         try{
             String name;
@@ -333,8 +381,9 @@ public class MovieManager implements Serializable {
                 int i = 0;
                 int y = 0;
                 while (i < list_of_content.size()) {
-                    if (list_of_content.get(i).equals("</movieList>"))
+                    if (list_of_content.get(i).equals("</movieList>")) {
                         break;
+                    }
                     if (list_of_content.get(i).contains("</movieInfo>")) {
                         y = y + 1;
                     }
@@ -469,8 +518,9 @@ public class MovieManager implements Serializable {
             int i = 0;
             int y = 0;
             while(i< list_of_content.size()){
-                if(list_of_content.get(i).equals("</reviewList>"))
+                if(list_of_content.get(i).equals("</reviewList>")) {
                     break;
+                }
                 if(list_of_content.get(i).contains("</reviewInfo>")){
                     y = y+1;
                 }

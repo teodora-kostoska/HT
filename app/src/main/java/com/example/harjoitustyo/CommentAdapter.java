@@ -30,7 +30,7 @@ public class CommentAdapter extends ArrayAdapter<Reviews> {
         TextView secondView = listitemView.findViewById(R.id.secondText);
         TextView thirdView = listitemView.findViewById(R.id.thirdText);
         TextView fourthView = listitemView.findViewById(R.id.fourthText);
-        firstView.setText(reviews.getUser().getName() + "\n"+ reviews.getUser().getEmail());
+        firstView.setText(reviews.getTimeStamp() + "\n" +reviews.getUser().getName() + "\n"+ reviews.getUser().getEmail());
         secondView.setText(reviews.getMovie().getMovieName());
         thirdView.setText(reviews.getRating());
         fourthView.setText(reviews.getComment());
