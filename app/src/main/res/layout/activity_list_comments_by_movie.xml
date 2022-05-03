@@ -6,27 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ListCommentsByMovie">
 
+    <TextView
+        android:id="@+id/textView6"
+
+        android:layout_width="410dp"
+        android:layout_height="136dp"
+        android:layout_marginTop="16dp"
+        android:drawableTop="@drawable/ic_movies"
+        android:gravity="center"
+        android:text="@string/showMovieComments"
+        android:textColor="@android:color/black"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Spinner
         android:id="@+id/comment_movieName"
         android:layout_width="400dp"
         android:layout_height="53dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="22dp"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <GridView
         android:id="@+id/comment_Grid"
-        android:layout_width="411dp"
-        android:layout_height="434dp"
+        android:layout_width="372dp"
+        android:layout_height="432dp"
         android:layout_marginBottom="4dp"
         android:numColumns="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comment_movieName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
